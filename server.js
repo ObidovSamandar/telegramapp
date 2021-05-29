@@ -14,8 +14,9 @@ app.use(express.json())
 // app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
 
 app.set('view engine', "ejs")
+require('dotenv').config()
 
-app.listen(3005, () => console.log(`SERVER LISTEN AT 3005`))
+app.listen(process.env.PORT, () => console.log(`SERVER LISTEN AT 3005`))
 
 // async function main(){
 //    await database()
