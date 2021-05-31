@@ -23,7 +23,7 @@ app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.i
 
 app.set('view engine', "ejs")
 
-server.listen(config.HTTPORT || 3020, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+server.listen(8005, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
@@ -33,21 +33,21 @@ app.get('/',  (req, res) => {
     })
 })
 
-app.get('/register',  (req,res)=>{
-    console.log(req.query)
+// app.get('/register',  (req,res)=>{
+//     console.log(req.query)
 
-    let { id, first_name, user_name, auth_data, hash } = req.query
+//     let { id, first_name, user_name, auth_data, hash } = req.query
 
-    res.redirect('/chat')
-})
+//     res.redirect('/chat')
+// })
 
-app.get('/chat', (req, res)=>{
-    res.render('chat',{
-        title:'Telegram'
-    })
-})
+// app.get('/chat', (req, res)=>{
+//     res.render('chat',{
+//         title:'Telegram'
+//     })
+// })
 
 
-io.on('connection', async (socket) => {
-    console.log(socket.id)
-})
+// io.on('connection', async (socket) => {
+//     console.log(socket.id)
+// })
