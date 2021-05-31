@@ -33,7 +33,6 @@ app.get('/', async (req, res) => {
     })
 })
 
-app.get('/registeruser', async (req,res)=>{
-    console.log(req)
-    console.log(res)
+app.get('/register', async (req,res)=>{
+    console.log(req.query)
 })
