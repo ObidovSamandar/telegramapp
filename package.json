@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "npm run build && node server.js",
-    "postinstall": "npm run build"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -20,9 +19,5 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",
     "socket.io": "^4.1.2"
-  },
-  "engines": {
-    "npm": "7.15.0",
-    "node": "14.16.0"
   }
 }
