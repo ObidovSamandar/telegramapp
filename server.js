@@ -1,31 +1,31 @@
 const express = require('express')
+const config = require('./configs/config')
 const app = express()
-// const http = require('http')
-// const server = http.createServer(app)
-// const { Server } = require('socket.io')
-// const io = new Server(server)
-// const path = require('path')
-// const database = require('./mongodb/mongodb')
-// const users = require('./models/Usermodel')
-// const messages = require('./models/Chatsmodel')
+const db = require('./storage/mongo')
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server)
+const path = require('path')
 
+;(async _=>{
+    try {
+        await db()
+        console.log('Mongodb database connection established')
+    } catch (e) {
+        console.log(e.message)
+    }
+})()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
-// app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
+app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
 
 app.set('view engine', "ejs")
-require('dotenv').config()
 
-app.listen(process.env.PORT, () => console.log(`SERVER LISTEN AT ${process.env.PORT}`))
+app.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
-// async function main(){
-//    await database()
 
-//    await users.deleteMany({})   
-//    await messages.deleteMany({})
-// }
-// main()
 
 app.get('/', async (req, res) => {
     res.render('login',{
@@ -37,6 +37,7 @@ app.get('/register', async (req,res)=>{
     console.log(req.query)
 
     let { id, first_name, user_name, auth_data, hash } = req.query
+
     res.redirect('/chat')
 })
 
@@ -44,4 +45,9 @@ app.get('/chat', (req, res)=>{
     res.render('chat',{
         title:'Telegram'
     })
+})
+
+
+io.on('connection', async (socket) => {
+    console.log(socket.id)
 })
