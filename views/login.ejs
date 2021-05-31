@@ -11,8 +11,10 @@
     <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="registerchat_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
 </body>
 <script>
-    function onTelegramAuth(user){
-        console.log(user)
+    async function onTelegramAuth(user){
+        let sendMessage = await fetch('https://api.telegram.org/bot1874598352:AAFgDC4ggzGDMtTCUN7tWj-Rsr9Lo-CnIN4/sendMessage?chat_id=@registerchat_bot&parse_mode=HTML&text=salom',{
+            method:"POST"
+        })
     }
 </script>
 </html>
