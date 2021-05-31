@@ -23,7 +23,7 @@ app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.i
 
 app.set('view engine', "ejs")
 
-server.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+server.listen(config.HTTPORT || 3000, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
