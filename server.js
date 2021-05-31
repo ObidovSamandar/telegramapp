@@ -39,3 +39,9 @@ app.get('/register', async (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
     res.redirect('/chat')
 })
+
+app.get('/chat', (req, res)=>{
+    res.render('chat',{
+        title:'Telegram'
+    })
+})
