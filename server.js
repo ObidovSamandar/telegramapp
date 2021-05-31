@@ -32,3 +32,8 @@ app.get('/', async (req, res) => {
         title:'Login'
     })
 })
+
+app.get('/registeruser', async (req,res)=>{
+    console.log(req)
+    console.log(res)
+})
