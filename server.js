@@ -27,13 +27,13 @@ app.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}
 
 
 
-app.get('/', async (req, res) => {
+app.get('/',  (req, res) => {
     res.render('login',{
         title:'Login'
     })
 })
 
-app.get('/register', async (req,res)=>{
+app.get('/register',  (req,res)=>{
     console.log(req.query)
 
     let { id, first_name, user_name, auth_data, hash } = req.query
