@@ -23,11 +23,12 @@ app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.i
 
 app.set('view engine', "ejs")
 
-server.listen(8005, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+server.listen(9905, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
 app.get('/',  (req, res) => {
+    console.log('Hello Login')
     res.render('login',{
         title:'Login'
     })
