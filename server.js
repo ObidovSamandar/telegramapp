@@ -19,11 +19,11 @@ const path = require('path')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
-app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
+// app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
 
 app.set('view engine', "ejs")
 
-app.listen(9905, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+server.listen(9905, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
