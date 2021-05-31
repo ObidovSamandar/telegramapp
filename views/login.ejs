@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="registerchat_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-</body>
-<script>
-    async function onTelegramAuth(user){
-        let sendMessage = await fetch('https://api.telegram.org/bot1874598352:AAFgDC4ggzGDMtTCUN7tWj-Rsr9Lo-CnIN4/sendMessage?chat_id=@registerchat_bot&parse_mode=HTML&text=salom',{
-            method:"POST"
-        })
-    }
-</script>
-</html>
+<%- include('./parts/header.ejs')%>
+    <div class="container-fluid p-0" style="height: 45vh  !important;">
+        <img src="../imgs/telegram_login.png" class="w-100 h-100" alt="Telegram Desktop">
+    </div>
+    <div class="container" style="height: 55vh !important; width: 100;">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-6  h-100vh text-center">
+                <h3>Telegram Desktop</h3>
+                <p>Welcome to the official Telegram Desktop app. It's fast and secure</p>
+                <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="registerchat_bot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+            </div>
+        </div>
+    </div>
+<%- include('./parts/footer.ejs') %>
+

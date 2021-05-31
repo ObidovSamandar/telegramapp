@@ -11,6 +11,7 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(express.static('public'))
 // app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
 
 app.set('view engine', "ejs")
@@ -27,5 +28,7 @@ app.listen(process.env.PORT, () => console.log(`SERVER LISTEN AT 3005`))
 // main()
 
 app.get('/', async (req, res) => {
-    res.render('login')
+    res.render('login',{
+        title:'Login'
+    })
 })
