@@ -36,8 +36,10 @@ app.get('/',  (req, res) => {
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
 
-    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.BOT_TOKEN.split(':')[0]}&text='Salom'`, {
-        method:"POST"
+    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text='Salom'`, {
+        method: 'POST',
+        body: JSON.stringify(todo),
+        headers: { 'Content-Type': 'application/json' }
     })
     res.redirect('/chat')
 })
