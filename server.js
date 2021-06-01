@@ -47,6 +47,6 @@ app.get('/chat', (req, res)=>{
 })
 
 
-io.on('connection', async (socket) => {
-    console.log(socket.id)
+io.on('connection', (socket) => {
+    console.log(socket.id,'bizga qoshildi')
 })
