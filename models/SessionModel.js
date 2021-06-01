@@ -14,7 +14,7 @@ let sessionsSchema = Schema({
         type: String,
         required: true
     },
-    socket_id: {
+    user_id: {
         type: String,
         required: true
     },

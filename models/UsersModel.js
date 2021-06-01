@@ -20,11 +20,11 @@ let usersSchema = Schema({
     message: {
         type: Array,
         default:[],
-        ref:'messages'
+        ref:'message'
     },
     session: {
         type: Array,
-        ref:'sessions'
+        ref:'session'
     }
 })
 

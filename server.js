@@ -7,7 +7,7 @@ const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server)
 const path = require('path')
-
+const fetch = require('node-fetch')
 const DATA = []
 ;(async _=>{
     try {
@@ -33,9 +33,12 @@ app.get('/',  (req, res) => {
     })
 })
 
-app.get('/register',  (req,res)=>{
+app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
 
+    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.BOT_TOKEN.split(':')[0]}&text='Salom'`, {
+        method:"POST"
+    })
     res.redirect('/chat')
 })
 

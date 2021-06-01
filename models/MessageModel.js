@@ -2,9 +2,6 @@ const mongoose = require('mongoose')
 
 const Schema = new mongoose.Schema
 let messagesSchema = Schema({
-    _id:{
-        type: Schema.Types.ObjectId
-    },
     message:{
         type:Array,
         required:true

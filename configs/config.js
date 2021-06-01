@@ -6,7 +6,8 @@ let config = {
     HTTPORT : getConfig('HTTP_PORT',''),
     MONGODB_URI :getConfig('Mongodb_URI',''),
     BOT_TOKEN: getConfig('TOKEN',''),
-    JWT_SECRETWORD: getConfig('SECRET_WORD','')
+    JWT_SECRETWORD: getConfig('SECRET_WORD',''),
+    Bot_id: getConfig('BOT_ID','')
 }
 
 
