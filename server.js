@@ -30,13 +30,14 @@ app.set('view engine', "ejs")
 server.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
-app.get('/status', (req,res)=>{
-    res.status(200).send({
-        ok:true
-    })
-})
+
+
 app.get('/',  (req, res) => {
-    res.render('login',{
+    res.status(200).redirect('/login')
+})
+
+app.get('/register', (req,res)=>{
+    res.render('login', {
         title:'Login'
     })
 })
