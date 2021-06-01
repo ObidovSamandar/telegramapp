@@ -38,8 +38,6 @@ app.get('/register', async  (req,res)=>{
 
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text='Salom'`, {
         method: 'POST',
-        body: JSON.stringify(todo),
-        headers: { 'Content-Type': 'application/json' }
     })
     res.redirect('/chat')
 })
