@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = new mongoose.Schema
-let usersSchema = Schema({
+
+let sessionsSchema = Schema({
     createdAt:{
         type:Date,
         default: Date.now
@@ -20,4 +21,4 @@ let usersSchema = Schema({
 })
 
 
-module.exports = mongoose.model('session', usersSchema)
+module.exports = mongoose.model('session', sessionsSchema)

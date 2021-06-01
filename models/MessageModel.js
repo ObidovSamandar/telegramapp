@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+
 const Schema = new mongoose.Schema
-let usersSchema = Schema({
+let messagesSchema = Schema({
     _id:{
         type: Schema.Types.ObjectId
     },
@@ -19,4 +20,4 @@ let usersSchema = Schema({
 })
 
 
-module.exports = mongoose.model('message', usersSchema)
+module.exports = mongoose.model('message', messagesSchema)
