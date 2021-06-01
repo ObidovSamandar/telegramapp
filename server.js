@@ -8,14 +8,14 @@ const db = require('./storage/mongo')
 // const io = new Server(server)
 // const path = require('path')
 
-;(async _=>{
-    try {
-        await db()
-        console.log('Mongodb database connection established')
-    } catch (e) {
-        console.log(e.message)
-    }
-})()
+// ;(async _=>{
+//     try {
+//         await db()
+//         console.log('Mongodb database connection established')
+//     } catch (e) {
+//         console.log(e.message)
+//     }
+// })()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
