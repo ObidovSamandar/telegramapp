@@ -14,5 +14,95 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="/socket/socket.io.js"></script>
+    <script>
+         let socket = io.connect('https://chat-socket-2oo2u.ondigitalocean.app/');
+                
+        const formElement = document.querySelector("#sign-form")
+        formElement.addEventListener('submit', event => {
+            event.preventDefault()
+            
+            if(name_form.value.length <= 0){
+                name_form.classList.add('border', 'border-danger')
+                return 0
+            }
+            
+            name_form.classList.remove('border', 'border-danger')
+            
+            socket.emit('sign', {
+                name: name_form.value
+            })
+            socket.on('logged', data => {
+                name_form.disabled = true
+                chat_content.classList.remove('d-none')
+                for(let user of data.allusers){
+                    const newTrElement = document.createElement('tr')
+                    const newTdElement = document.createElement("td")
+                    newTdElement.textContent = user.name
+                    newTrElement.dataset.userId = user.user_id
+                    newTrElement.appendChild(newTdElement)
+                    tbody.appendChild(newTrElement)
+                    let createUser = document.createElement('option')
+                    createUser.dataset.userId = user.chat_id
+                    createUser.innerText = user.name
+                    createUser.value = user.name
+                    alluser.appendChild(createUser)
+                }
+            })
+
+            socket.on('new_member', data => {
+                const newTrElement = document.createElement('tr')
+                const newTdElement = document.createElement("td")
+                newTdElement.textContent = data.name
+                newTrElement.dataset.userId = data.id
+                newTrElement.appendChild(newTdElement)
+                tbody.appendChild(newTrElement)
+                let createUser = document.createElement('option')
+                createUser.dataset.userId = data.id
+                createUser.innerText = data.name
+                createUser.value = data.name
+                alluser.appendChild(createUser) 
+            })
+            socket.on('left_member', data => {
+                const element = document.querySelector(`[data-user-id='${data.id}']`)
+                if(element){
+                    element.remove()
+                }
+            })
+            
+        })
+        
+        
+        chat_form.addEventListener('submit', event => {
+            event.preventDefault()
+            
+            if(message_text.value.length <= 0 && message_text.value.length > 256){
+                message_text.classList.add('border','border-danger')
+                return 0
+            }
+            
+            message_text.classList.remove('border','border-danger')
+            
+            socket.emit('new_message', {
+                message: message_text.value ,
+                to: document.getElementById('alluser').options[document.getElementById('alluser').selectedIndex].dataset.userId
+            })
+            messages.innerHTML = `<li class="my-2">
+                <div class="card">
+                    <div class="card-header">${name_form.value}</div>
+                    <div class="card-body">${message_text.value}</div>
+                </div>
+            </li>` + messages.innerHTML
+            
+        })
+
+        socket.on('new_message', data => {
+                messages.innerHTML = `<li class="my-2">
+                <div class="card">
+                    <div class="card-header">${data.owner}</div>
+                    <div class="card-body">${data.message}</div>
+                </div>
+                </li>` + messages.innerHTML
+        })
+    </script>
 <%- include('./parts/footer.ejs') %>
 
