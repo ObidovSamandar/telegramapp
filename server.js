@@ -33,7 +33,6 @@ app.get('/',  (req, res) => {
 })
 
 app.get('/register',  (req,res)=>{
-    console.log(io)
     let { id, first_name, user_name, auth_data, hash } = req.query
 
     res.redirect('/chat')
@@ -45,10 +44,9 @@ app.get('/chat', (req, res)=>{
     })
 })
 
-console.log('Hello')
-console.log(io)
 
-
+console.log('hello')
 io.on('connection', (socket) => {
+    console.log('salom')
     console.log(socket.id,'bizga qoshildi')
 })
