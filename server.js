@@ -45,7 +45,8 @@ app.get('/chat', (req, res)=>{
 })
 
 
+
 io.on('connection', (socket) => {
-    console.log('salom')
     console.log(socket.id,'bizga qoshildi')
 })
+
