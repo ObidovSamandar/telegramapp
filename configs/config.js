@@ -1,4 +1,5 @@
 const Path = require('path')
+
 require('dotenv').config({path:Path.join(__dirname,'../','.env')})
 
 let config = {
@@ -18,4 +19,4 @@ function getConfig(name, addition=""){
     return addition
 }
 
-module.exports =config
+module.exports = config
