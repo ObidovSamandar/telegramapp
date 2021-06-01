@@ -2,11 +2,11 @@ const express = require('express')
 const config = require('./configs/config')
 const app = express()
 const db = require('./storage/mongo')
-const http = require('http')
-const server = http.createServer(app)
-const { Server } = require('socket.io')
-const io = new Server(server)
-const path = require('path')
+// const http = require('http')
+// const server = http.createServer(app)
+// const { Server } = require('socket.io')
+// const io = new Server(server)
+// const path = require('path')
 
 ;(async _=>{
     try {
@@ -23,7 +23,7 @@ app.use(express.static('public'))
 
 app.set('view engine', "ejs")
 
-server.listen(config.HTTPORT || 3030 , () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+app.listen(config.HTTPORT || 3030 , () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
