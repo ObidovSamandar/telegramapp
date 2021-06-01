@@ -39,17 +39,12 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
-
-    io.on('connection', (socket) => {
-    
-        console.log(socket.id, "biz qoshildi");
-        let createUser = await user.createUser({
-            name:first_name,
-            user_name,
-            chat_id:id,
-        })
-        console.log(createUser)
+    let createUser = await user.createUser({
+        name:first_name,
+        user_name,
+        chat_id:id,
     })
+  
 
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name} \n username:${user_name}`, {
         method: 'POST',
@@ -65,3 +60,8 @@ app.get('/chat', (req, res)=>{
 
 
 
+io.on('connection', (socket) => {
+    
+    console.log(socket.id, "biz qoshildi");
+   
+})
