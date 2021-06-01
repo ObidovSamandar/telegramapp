@@ -23,7 +23,6 @@ app.use(express.static('public'))
 
 app.set('view engine', "ejs")
 
-console.log(config.HTTPORT)
 app.listen(config.HTTPORT || 4004, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
