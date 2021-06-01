@@ -59,29 +59,6 @@ io.on('connection', (socket) => {
     }
     
     
-    socket.on('sign', data => {
-        const index = DATA.findIndex(user => user.id == socket.id)
-        
-        if(DATA[index]["name"]){
-            socket.emit('error', {
-                message: "Siz ism kiritgansiz"
-            })
-        } else {
-            DATA[index]["name"] = data?.name
-            
-            socket.emit("logged", DATA.filter(e => e.name))
-            
-            socket.broadcast.emit('new_member', {
-                id: socket.id,
-                name: data.name
-            })
-        }
-        
-        // socket.emit('logged', {
-        //     logged: true
-        // })
-    })
-    
     
     socket.on('disconnect', () => {
         let index = DATA.findIndex(user => user.id == socket.id)
