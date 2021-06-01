@@ -15,7 +15,6 @@ let usersSchema = Schema({
     },
     socket_id: {
         type: String,
-        required: true
     },
     message: {
         type: Array,

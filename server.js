@@ -8,7 +8,11 @@ const { Server } = require('socket.io')
 const io = new Server(server)
 const path = require('path')
 const fetch = require('node-fetch')
-const DATA = []
+
+
+const userModel = require('./controller/UserRegisterController')
+
+const user  = new userModel()
 ;(async _=>{
     try {
         await db()
@@ -36,9 +40,18 @@ app.get('/',  (req, res) => {
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
 
-    console.log(config.BOT_TOKEN)
-    console.log(config.Bot_id)
-    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text='Salom'`, {
+    io.on('connection', (socket) => {
+    
+        console.log(socket.id, "biz qoshildi");
+        let createUser = await user.createUser({
+            name:first_name,
+            user_name,
+            chat_id:id,
+        })
+        console.log(createUser)
+    })
+
+    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\nname:${first_name}\nusername:${user_name}`, {
         method: 'POST',
     })
     res.redirect('/chat')
@@ -52,36 +65,3 @@ app.get('/chat', (req, res)=>{
 
 
 
-io.on('connection', (socket) => {
-    
-    console.log(socket.id, "biz qoshildi");
-    
-    let id = DATA.find(user => user.id == socket.id)
-    if(!id){
-        DATA.push({
-            id: socket.id
-        })
-    }
-    
-    
-    
-    socket.on('disconnect', () => {
-        let index = DATA.findIndex(user => user.id == socket.id)
-        DATA.splice(index, 1)
-        console.log(socket.id, "bizni tark etdi");
-        
-        socket.broadcast.emit('left_member', {
-            id: socket.id,
-        })        
-    });
-
-    socket.on('new_message', data => {
-        let index = DATA.findIndex(user => user.id == socket.id)
-        if(DATA[index]["name"]){
-            socket.broadcast.emit('new_message', {
-                owner: DATA[index]["name"],
-                message: data.message
-            })
-        }
-    })
-})
