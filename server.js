@@ -15,7 +15,7 @@ const path = require('path')
     } catch (e) {
         console.log(e.message)
     }
-})()
+})();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
@@ -45,7 +45,6 @@ app.get('/chat', (req, res)=>{
 })
 
 
-console.log('hello')
 io.on('connection', (socket) => {
     console.log('salom')
     console.log(socket.id,'bizga qoshildi')
