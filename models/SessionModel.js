@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const Schema = new mongoose.Schema
 
-let sessionsSchema = Schema({
+let sessionsSchema = new mongoose.Schema({
     createdAt:{
         type:Date,
         default: Date.now

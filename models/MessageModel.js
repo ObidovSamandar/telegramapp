@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const Schema = new mongoose.Schema
-let messagesSchema = Schema({
+let messagesSchema = new mongoose.Schema({
     message:{
         type:Array,
         required:true
