@@ -33,8 +33,7 @@ app.get('/',  (req, res) => {
 })
 
 app.get('/register',  (req,res)=>{
-    console.log(req.query)
-
+    console.log(io)
     let { id, first_name, user_name, auth_data, hash } = req.query
 
     res.redirect('/chat')
@@ -45,6 +44,9 @@ app.get('/chat', (req, res)=>{
         title:'Telegram'
     })
 })
+
+console.log('Hello')
+console.log(io)
 
 
 io.on('connection', (socket) => {
