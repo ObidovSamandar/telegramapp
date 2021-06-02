@@ -33,7 +33,11 @@ app.set('view engine', "ejs")
 
 server.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
-
+app.get('/health', (req,res)=>{
+    res.status(200).send({
+        ok:true
+    })
+})
 
 
 app.get('/',  (req, res) => {
