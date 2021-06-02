@@ -21,13 +21,17 @@ const user  = new userModel()
         console.log(e.message)
     }
 })();
+
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
-app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
+// app.use('/socket', express.static(path.join(__dirname, 'node_modules', "socket.io", "client-dist")))
 
 app.set('view engine', "ejs")
-server.listen(config.HTTPORT || 8085, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
+
+
+server.listen(config.HTTPORT, () => console.log(`SERVER LISTEN AT ${config.HTTPORT}`))
 
 
 
@@ -63,8 +67,8 @@ app.get('/chat', (req, res)=>{
 
 
 
-io.on('connection', (socket) => {
+// io.on('connection', (socket) => {
     
-    console.log(socket.id, "biz qoshildi");
+//     console.log(socket.id, "biz qoshildi");
    
-})
+// })
