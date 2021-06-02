@@ -33,14 +33,11 @@ server.listen(config.HTTPORT || 8085, () => console.log(`SERVER LISTEN AT ${conf
 
 
 app.get('/',  (req, res) => {
-    res.status(200).redirect('/login')
-})
-
-app.get('/login', (req,res)=>{
-    res.render('login', {
-        title:'Login'
+    res.render('login',{
+        title:"Login"
     })
 })
+
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
