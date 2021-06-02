@@ -4,10 +4,10 @@ const app = express()
 const db = require('./storage/mongo')
 const http = require('http')
 const server = http.createServer(app)
-const { Server } = require('socket.io')
-const io = new Server(server)
-const path = require('path')
-const fetch = require('node-fetch')
+// const { Server } = require('socket.io')
+// const io = new Server(server)
+// const path = require('path')
+// const fetch = require('node-fetch')
 
 
 const userModel = require('./controller/UserRegisterController')
@@ -43,21 +43,21 @@ app.get('/',  (req, res) => {
 })
 
 
-app.get('/register', async  (req,res)=>{
-    let { id, first_name, user_name, auth_data, hash } = req.query
-    let createUser = await user.createUser({
-        name:first_name,
-        user_name,
-        chat_id:id,
-    })
+// app.get('/register', async  (req,res)=>{
+//     let { id, first_name, user_name, auth_data, hash } = req.query
+//     let createUser = await user.createUser({
+//         name:first_name,
+//         user_name,
+//         chat_id:id,
+//     })
   
 
-    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name} \n username:${user_name}`, {
-        method: 'POST',
-    })
-    console.log(sendMessageTOBot)
-    res.redirect('/chat')
-})
+//     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name} \n username:${user_name}`, {
+//         method: 'POST',
+//     })
+//     console.log(sendMessageTOBot)
+//     res.redirect('/chat')
+// })
 
 app.get('/chat', (req, res)=>{
     res.render('chat',{
