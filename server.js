@@ -10,6 +10,7 @@ const path = require('path')
 const fetch = require('node-fetch')
 const sha256 = require('crypto-js/sha256')
 const base16 = require('crypto-js/enc-hex')
+const base162 = require('crypto-js/format-hex')
 const userModel = require('./controller/UserRegisterController')
 const hmacSha256 = require('crypto-js/hmac-sha256')
 
@@ -60,11 +61,10 @@ app.get('/register', async  (req,res)=>{
     let datachekString = `auth_date$=${auth_data}\nfirst_name=${first_name}\nid=${id}\nusername=${username}`
     let compare = hmacSha256(datachekString,secretKey)
     let compare2 = base16.stringify(compare)
+    let compare22 = base16(compare)
     console.log(hash)
-    console.log(compare2)
-    console.log(compare)
-    console.log(compare.toString(16)==hash)
-    console.log(compare2==hash)
+    console.log(compare2=hash)
+    console.log(compare22=hash)
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
 
         method: 'POST',
