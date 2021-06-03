@@ -61,7 +61,7 @@ app.get('/register', async  (req,res)=>{
     let datachekString = `auth_date$=${auth_data}\nfirst_name=${first_name}\nid=${id}\nusername=${username}`
     let compare = hmacSha256(datachekString,secretKey)
     let compare2 = base16.stringify(compare)
-    let compare22 = base16(compare)
+    let compare22 = base162.stringify(compare)
     console.log(hash)
     console.log(compare2=hash)
     console.log(compare22=hash)
