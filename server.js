@@ -47,7 +47,7 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, username, auth_data, hash } = req.query
-    let findUser = await user.findOne({
+    let findUser = await user.getUser({
         chat_id:id
     })
     if(!findUser){

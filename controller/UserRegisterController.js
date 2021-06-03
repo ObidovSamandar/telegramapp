@@ -27,9 +27,9 @@ module.exports = class UserController{
         }
     }
 
-    getUser = async function(id){
+    getUser = async function(payload){
         try {
-            let getUser = await user.findOne({_id:id})
+            let getUser = await user.findOne(payload)
             return getUser
         } catch (e) {
             console.log(e.message)
