@@ -47,17 +47,22 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, username, auth_data, hash } = req.query
-    let createUser = await user.createUser({
-        name:first_name,
-        user_name:username,
-        chat_id:id,
+    let findUser = await user.findOne({
+        chat_id:id
     })
+    if(!findUser){
+        let createUser = await user.createUser({
+            name:first_name,
+            user_name:username,
+            chat_id:id,
+        })
     
-    let datachekString = `auth_date$=${auth_data}\nfirst_name=${first_name}\nid=${id}\nusername=${username}`
-    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
-
-        method: 'POST',
-    })
+        let datachekString = `auth_date$=${auth_data}\nfirst_name=${first_name}\nid=${id}\nusername=${username}`
+        let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
+    
+            method: 'POST',
+        })
+    }
     res.redirect('/chat')
 })
 
