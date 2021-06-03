@@ -49,6 +49,7 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
+    console.log(req.query)
     console.log(id,first_name,user_name,auth_data,hash)
     let createUser = await user.createUser({
         name:first_name,
