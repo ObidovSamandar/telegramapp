@@ -63,7 +63,7 @@ app.get('/register', async  (req,res)=>{
     console.log(hash)
     console.log(compare2)
     console.log(compare)
-    console.log(compare.toString()==hash)
+    console.log(compare.toString(16)==hash)
     console.log(compare2==hash)
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
 

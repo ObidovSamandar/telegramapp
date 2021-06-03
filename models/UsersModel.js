@@ -10,7 +10,8 @@ let usersSchema = new mongoose.Schema({
     },
     chat_id: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     socket_id: {
         type: String,
