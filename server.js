@@ -8,9 +8,10 @@ const { Server } = require('socket.io')
 const io = new Server(server)
 const path = require('path')
 const fetch = require('node-fetch')
-
+const sha256 = require('crypto-js/sha256')
 
 const userModel = require('./controller/UserRegisterController')
+const hmacSha256 = require('crypto-js/hmac-sha256')
 
 const user  = new userModel()
 ;(async _=>{
@@ -49,16 +50,17 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, username, auth_data, hash } = req.query
-    console.log(req.query)
-    console.log(id,first_name,username,auth_data,hash)
     let createUser = await user.createUser({
         name:first_name,
         user_name:username,
         chat_id:id,
     })
-    console.log(createUser)
 
-    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name} \n username:${username}`, {
+    let secretKey = sha256(config.BOT_TOKEN)
+    let compare = hmacSha256(req.query,secretKey).toString(16)
+    console.log(compare==hash)
+
+    let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
         method: 'POST',
     })
     res.redirect('/chat')
