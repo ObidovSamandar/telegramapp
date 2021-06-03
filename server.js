@@ -8,11 +8,7 @@ const { Server } = require('socket.io')
 const io = new Server(server)
 const path = require('path')
 const fetch = require('node-fetch')
-const sha256 = require('crypto-js/sha256')
-const base16 = require('crypto-js/enc-hex')
-const base162 = require('crypto-js/format-hex')
 const userModel = require('./controller/UserRegisterController')
-const hmacSha256 = require('crypto-js/hmac-sha256')
 
 const user  = new userModel()
 ;(async _=>{
@@ -56,15 +52,8 @@ app.get('/register', async  (req,res)=>{
         user_name:username,
         chat_id:id,
     })
-
-    let secretKey = sha256(config.BOT_TOKEN)
+    
     let datachekString = `auth_date$=${auth_data}\nfirst_name=${first_name}\nid=${id}\nusername=${username}`
-    let compare = hmacSha256(datachekString,secretKey)
-    let compare2 = base16.stringify(compare)
-    let compare22 = base162.stringify(compare)
-    console.log(hash)
-    console.log(compare2=hash)
-    console.log(compare22=hash)
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
 
         method: 'POST',
@@ -80,8 +69,7 @@ app.get('/chat', (req, res)=>{
 
 
 
-// io.on('connection', (socket) => {
+io.on('connection', (socket) => {
+    console.log(socket.id, "biz qoshildi");
     
-//     console.log(socket.id, "biz qoshildi");
-   
-// })
+})
