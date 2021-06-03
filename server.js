@@ -49,17 +49,17 @@ app.get('/',  (req, res) => {
 
 app.get('/register', async  (req,res)=>{
     let { id, first_name, user_name, auth_data, hash } = req.query
+    console.log(id,first_name,user_name,auth_data,hash)
     let createUser = await user.createUser({
         name:first_name,
         user_name,
         chat_id:id,
     })
-  
+    console.log(createUser)
 
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name} \n username:${user_name}`, {
         method: 'POST',
     })
-    console.log(sendMessageTOBot)
     res.redirect('/chat')
 })
 
