@@ -57,9 +57,8 @@ app.get('/register', async  (req,res)=>{
     })
 
     let secretKey = sha256(config.BOT_TOKEN)
-    let compare = hmacSha256(req.query,secretKey).toString(16)
-    console.log(compare==hash)
-
+    let compare = hmacSha256(req.query,secretKey).toString()
+    console.log(compare)
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
         method: 'POST',
     })
