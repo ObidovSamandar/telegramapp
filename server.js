@@ -9,7 +9,7 @@ const io = new Server(server)
 const path = require('path')
 const fetch = require('node-fetch')
 const sha256 = require('crypto-js/sha256')
-
+const base16 = require('crypto-js/enc-hex')
 const userModel = require('./controller/UserRegisterController')
 const hmacSha256 = require('crypto-js/hmac-sha256')
 
@@ -57,9 +57,12 @@ app.get('/register', async  (req,res)=>{
     })
 
     let secretKey = sha256(config.BOT_TOKEN)
-    let compare = hmacSha256(req.query,secretKey).toString()
-    console.log(compare)
+    let compare = hmacSha256(req.query,secretKey)
+    let compare2 = base16.stringify(compare)
+    console.log(compare.toString()==hash)
+    console.log(compare2==hash)
     let sendMessageTOBot = await fetch(`https://api.telegram.org/bot${config.BOT_TOKEN}/sendMessage?chat_id=${config.Bot_id}&text=\n name:${first_name}\nusername:${username}`, {
+
         method: 'POST',
     })
     res.redirect('/chat')
